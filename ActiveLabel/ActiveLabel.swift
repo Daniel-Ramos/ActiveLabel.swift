@@ -332,7 +332,9 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             }
             
             for element in elements {
-                mutAttrString.setAttributes(attributes, range: element.range)
+                // fixing range of custom link attributes [DR]
+                mutAttrString.setAttributes(attributes, range: NSRange(location: element.range.location + 1,
+                                                                       length: element.range.length - 1))
             }
         }
     }
